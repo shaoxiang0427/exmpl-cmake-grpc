@@ -14,3 +14,8 @@ Reflection can be enabled by linking agains `gRPC::grpc++_reflection`, enabling 
 If this project is linked with a static version of the grpc library from vcpkg
 the `-Wl,--whole-archive` flag has to be used. (together with `--allow-multiple-definition`). When linking dynamically,
 you will want to link the reflection library with `--no-as-needed`.
+
+
+
+关联grpc库操作指南：
+1、下载https://github.com/grpc/grpc库，编译“INSTALL”项目，会在C:\Program Files\grpc生成对应的include头文件、lib库、dll库等；                                                              2、使用本项目还需要关联protobuf库下的google文件夹的头文件
