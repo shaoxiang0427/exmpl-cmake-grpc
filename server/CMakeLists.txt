@@ -23,8 +23,8 @@ link_directories("D:/vs_project/exmpl-cmake-grpc-master/third_party/grpc/lib/")
 add_executable(server ${SOURCES})
 target_link_libraries(server
     PRIVATE
-        myproto
-		grpc.lib
+myproto
+grpc.lib
 grpc++.lib
 libprotobuf.lib
 grpc++_reflection.lib
