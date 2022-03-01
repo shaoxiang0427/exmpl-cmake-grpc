@@ -1,30 +1,13 @@
-find_package(protobuf CONFIG REQUIRED)
-find_package(gRPC CONFIG REQUIRED)
-find_package(Threads)
+aux_source_directory(./myproto DIR_LIB_SRCS)
 
-#
-# Protobuf/Grpc source files
-#
-set(PROTO_FILES
-    myproto/address.proto
-    myproto/addressbook.proto
-)
+include_directories("D:/vs_project/exmpl-cmake-grpc-master/third_party/grpc/include/")
+include_directories("D:/vs_project/exmpl-cmake-grpc-master/third_party/protobuf/")
 
-#
-# Add Library target with protobuf sources
-#
-add_library(myproto ${PROTO_FILES})
-target_link_libraries(myproto
-    PUBLIC
-        protobuf::libprotobuf
-        gRPC::grpc
-        gRPC::grpc++
-)
-target_include_directories(myproto PUBLIC ${CMAKE_CURRENT_BINARY_DIR})
+link_directories("D:/vs_project/exmpl-cmake-grpc-master/third_party/grpc/lib/")
 
-#
-# Compile protobuf and grpc files in myproto target to cpp
-#
-get_target_property(grpc_cpp_plugin_location gRPC::grpc_cpp_plugin LOCATION)
-protobuf_generate(TARGET myproto LANGUAGE cpp)
-protobuf_generate(TARGET myproto LANGUAGE grpc GENERATE_EXTENSIONS .grpc.pb.h .grpc.pb.cc PLUGIN "protoc-gen-grpc=${grpc_cpp_plugin_location}")
+add_library(myproto 
+				./myproto/address.grpc.pb.cc
+				./myproto/address.pb.cc
+				./myproto/addressbook.grpc.pb.cc
+				./myproto/addressbook.pb.cc
+			)
